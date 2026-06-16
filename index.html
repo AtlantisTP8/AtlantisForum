@@ -1032,6 +1032,28 @@ async function sendMsg(){
   loadConvList();
 }
 
+async function openComments(postId){
+
+  const yorum = prompt("Yorum yaz:");
+
+  if(!yorum) return;
+
+  const {error} = await sb
+  .from('comments')
+  .insert({
+      post_id: postId,
+      user_handle: currentUser.handle,
+      text: yorum
+  });
+
+  if(error){
+      showToast('❌ Yorum gönderilemedi');
+      return;
+  }
+
+  showToast('💬 Yorum gönderildi');
+}
+
 // ── GROUPS ──
 function buildGroupModal(){
   const gm=document.getElementById('grp-members');gm.innerHTML='';
