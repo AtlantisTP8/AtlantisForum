@@ -1374,5 +1374,63 @@ async function sendComment(){
 
 init();
 </script>
+
+<div id="comments-modal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+z-index:9999;
+justify-content:center;
+align-items:center;
+">
+
+<div style="
+width:600px;
+max-width:95%;
+height:70%;
+background:#111;
+border-radius:15px;
+display:flex;
+flex-direction:column;
+">
+
+<div style="padding:15px;font-size:18px">
+💬 Yorumlar
+</div>
+
+<div
+id="comments-list"
+style="
+flex:1;
+overflow:auto;
+padding:10px;
+">
+</div>
+
+<div style="display:flex;padding:10px;gap:10px">
+
+<input
+id="comment-input"
+placeholder="Yorum yaz..."
+style="flex:1">
+
+<button onclick="sendComment()">
+Gönder
+</button>
+
+<button onclick="document.getElementById('comments-modal').style.display='none'">
+Kapat
+</button>
+
+</div>
+
+</div>
+</div>
+    
 </body>
 </html>
