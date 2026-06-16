@@ -727,6 +727,34 @@ async function bootApp(){
   loadNotifs();
 }
 
+async function openComments(postId){
+
+ const {data} = await sb
+ .from("comments")
+ .select("*")
+ .eq("post_id",postId)
+ .order("created_at",{ascending:true});
+
+ let html = "";
+
+ (data || []).forEach(c=>{
+
+   html += `
+   <div class="comment-item">
+      <b>@${c.user_handle}</b><br>
+      ${c.text}
+   </div>
+   `;
+
+ });
+
+ document.getElementById("comments-list").innerHTML = html;
+
+ document.getElementById("comments-post-id").value = postId;
+
+ openModal("comments-modal");
+}
+
 function doLogout(){
   localStorage.removeItem('af_handle');
   localStorage.removeItem('af_pass');
