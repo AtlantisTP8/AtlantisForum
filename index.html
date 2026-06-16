@@ -250,6 +250,47 @@ body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk',sans-seri
 .load-overlay{position:fixed;inset:0;background:var(--bg);z-index:2000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;}
 .load-logo{font-family:'Orbitron',monospace;font-size:26px;font-weight:900;color:var(--accent);letter-spacing:4px;text-shadow:0 0 28px var(--glow);}
 .page-title{font-family:'Orbitron',monospace;font-size:13px;color:var(--txt);letter-spacing:1px;padding:6px 0 14px;}
+
+#comments-modal input{
+    background:#1a1a1a;
+    border:1px solid #333;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    outline:none;
+}
+
+#comments-modal input:focus{
+    border-color:#4da3ff;
+    box-shadow:0 0 10px rgba(77,163,255,.3);
+}
+
+#comments-modal button{
+    background:#4da3ff;
+    border:none;
+    color:white;
+    padding:10px 16px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+#comments-modal button:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+
+#comments-list{
+    scrollbar-width:thin;
+}
+
+#comments-list div{
+    background:#181818;
+    margin-bottom:8px;
+    border-radius:10px;
+    padding:12px;
+}
+  
 </style>
 </head>
 <body>
