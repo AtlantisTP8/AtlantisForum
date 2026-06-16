@@ -748,6 +748,47 @@ async function openComments(postId){
 
  });
 
+async function sendComment(){
+
+ const postId =
+ document.getElementById("comments-post-id").value;
+
+ const text =
+ document.getElementById("comment-input").value.trim();
+
+ if(!text) return;
+
+ await sb.from("comments").insert({
+
+   post_id:postId,
+   user_handle:currentUser.handle,
+   text:text
+
+ });
+
+ const p =
+ currentPosts.find(x=>x.id==postId);
+
+ if(p){
+
+    p.comments_count++;
+
+    await sb
+      .from("posts")
+      .update({
+          comments_count:p.comments_count
+      })
+      .eq("id",postId);
+
+ }
+
+ document.getElementById("comment-input").value="";
+
+ openComments(postId);
+
+ loadPosts();
+}
+
  document.getElementById("comments-list").innerHTML = html;
 
  document.getElementById("comments-post-id").value = postId;
