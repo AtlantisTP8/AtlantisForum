@@ -868,7 +868,7 @@ function makePostCard(p){
     <div class="post-actions">
       <button class="p-action${liked?' liked':''}" onclick="toggleLike(${p.id},this)"><span class="p-action-ico">❤️</span><span id="lc-${p.id}">${p.likes_count||0}</span></button>
       <button class="p-action${faved?' faved':''}" onclick="toggleFav(${p.id},this)"><span class="p-action-ico">⭐</span>Favori</button>
-      <button class="post-action" onclick="openComments(${p.id})"><span class="p-action-ico">💬</span>${p.comments_count||0}</button>
+      <button class="post-action comment-btn"onclick="openComments(${p.id})"><span>💬</span><span class="comment-count"> ${p.comments_count || 0}</span></button>
       <button class="p-action" onclick="sharePost(${p.id})"><span class="p-action-ico">🔗</span>Paylaş</button>
       ${canDel?`<button class="post-del" onclick="delPost(${p.id})" title="Sil">🗑️</button>`:''}
     </div>`;
