@@ -782,45 +782,33 @@ async function openComments(postId){
 
  });
 
-async function sendComment(){
+async function sendComment(postId){
 
- const postId =
- document.getElementById("comments-post-id").value;
+    const inp = document.getElementById("comment-input");
 
- const text =
- document.getElementById("comment-input").value.trim();
+    const text = inp.value.trim();
 
- if(!text) return;
+    if(!text) return;
 
- await sb.from("comments").insert({
+    const { error } = await db
+      .from("comments")
+      .insert({
+          post_id: postId,
+          user_handle: currentUser.handle,
+          text: text
+      });
 
-   post_id:postId,
-   user_handle:currentUser.handle,
-   text:text
+    if(error){
+        console.log(error);
+        showToast("❌ Yorum gönderilemedi");
+        return;
+    }
 
- });
+    inp.value = "";
 
- const p =
- currentPosts.find(x=>x.id==postId);
+    await openComments(postId);
 
- if(p){
-
-    p.comments_count++;
-
-    await sb
-      .from("posts")
-      .update({
-          comments_count:p.comments_count
-      })
-      .eq("id",postId);
-
- }
-
- document.getElementById("comment-input").value="";
-
- openComments(postId);
-
- loadPosts();
+    showToast("✅ Yorum gönderildi");
 }
 
  document.getElementById("comments-list").innerHTML = html;
